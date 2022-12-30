@@ -5,5 +5,5 @@ Todo List Application
 
 ### Init (Server)
 - ```bash
-  dotnet new webapi
+  dotnet new webapi -f netcoreapp3.1
   ```
