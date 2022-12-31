@@ -1,6 +1,6 @@
 using System;
 
-namespace sangjin
+namespace TodoList.Data
 {
     public class Todo
     {
