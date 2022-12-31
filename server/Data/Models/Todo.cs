@@ -1,6 +1,6 @@
 using System;
 
-namespace TodoList.Data
+namespace TodoList.Data.Model
 {
     public class Todo
     {
