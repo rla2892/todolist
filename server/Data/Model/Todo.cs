@@ -10,9 +10,6 @@ namespace TodoList.Data.Model
         public DateTime CreatedTime { get; set; }
         public DateTime UpdatedTime { get; set; }
         public DateTime? DoneTime { get; set; }
-        public bool IsDone
-        {
-            get => this.DoneTime.HasValue;
-        }
+        public bool IsDone { get => this.DoneTime.HasValue; }
     }
 }
