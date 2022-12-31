@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using TodoList.Data.Context;
+using TodoList.Service;
 
 namespace TodoList
 {
@@ -22,7 +23,8 @@ namespace TodoList
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            _connectionString = Configuration.GetConnectionString("MyLocal");
+            //_connectionString = Configuration.GetConnectionString("TodoListLocal");
+            _connectionString = Configuration["TodoListLocal"];
         }
 
         public IConfiguration Configuration { get; }
@@ -31,6 +33,7 @@ namespace TodoList
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(_connectionString));
+            services.AddScoped<TodoService>(); // add singleton 되지 않음 -> appDbContext 와 scope 문제
             services.AddControllers();
             services.AddSwaggerGen();
         }
