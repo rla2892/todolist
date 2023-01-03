@@ -23,8 +23,7 @@ namespace TodoList
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            //_connectionString = Configuration.GetConnectionString("TodoListLocal");
-            _connectionString = Configuration["TodoListLocal"];
+            _connectionString = Configuration.GetConnectionString("TodoListLocal");
         }
 
         public IConfiguration Configuration { get; }
