@@ -1,6 +1,9 @@
 # todolist
 Todo List Application
 
+## Swagger 확인
+- ~/swagger
+
 ## Init
 
 ### Init (Server)
