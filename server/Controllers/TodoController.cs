@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using TodoList.Data.Model;
 using TodoList.Data.Model.ViewModel;
 using TodoList.Service;
 
@@ -20,6 +21,27 @@ namespace TodoList.Controllers
         public IActionResult AddTodo([FromBody] TodoViewAdd todo)
         {
             _service.AddTodo(todo);
+            return Ok();
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult ModifyTodo(Guid id, [FromBody] TodoViewModify todo)
+        {
+            _service.ModifyTodo(id, todo);
+            return Ok();
+        }
+
+        [HttpPut("done/{id}")]
+        public IActionResult SetDone(Guid id)
+        {
+            _service.SetDone(id, true);
+            return Ok();
+        }
+
+        [HttpPut("undo/{id}")]
+        public IActionResult Undo(Guid id)
+        {
+            _service.SetDone(id, false);
             return Ok();
         }
 

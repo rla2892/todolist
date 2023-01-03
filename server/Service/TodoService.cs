@@ -31,7 +31,49 @@ namespace TodoList.Service
             _context.SaveChanges(); // TODO: async 동작 확인
         }
 
+        private Todo getTodo(Guid id) => _context.Todo.FirstOrDefault(o => o.Id == id);
+
+        public void ModifyTodo(Guid id, TodoViewModify newTodo)
+        {
+            var now = DateTime.Now;
+            var todo = getTodo(id);
+            if (todo != null)
+            {
+                todo.Content = newTodo.Content;
+                todo.UpdatedTime = now;
+                if(newTodo.IsDone)
+                {
+                    todo.DoneTime = now;
+                }
+                else
+                {
+                    todo.DoneTime = null;
+                }
+
+                _context.SaveChanges();
+            }
+        }
+        public void SetDone(Guid id, bool isDone)
+        {
+            var now = DateTime.Now;
+            var todo = getTodo(id);
+            if (todo != null)
+            {
+                todo.UpdatedTime = now;
+                if (isDone)
+                {
+                    todo.DoneTime = now;
+                }
+                else
+                {
+                    todo.DoneTime = null;
+                }
+
+                _context.SaveChanges();
+            }
+        }
+
         public List<Todo> ListTodo() => _context.Todo.ToList();
-        public Todo GetTodo(Guid id) => _context.Todo.FirstOrDefault(o => o.Id == id);
+        public Todo GetTodo(Guid id) => getTodo(id);
     }
 }
