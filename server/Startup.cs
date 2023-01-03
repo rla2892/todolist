@@ -45,12 +45,12 @@ namespace TodoList
             {
                 app.UseDeveloperExceptionPage();
 
-                // NOTE : swagger 정보 -> https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.1&tabs=visual-studio
-                // Enable middleware to serve generated Swagger as a JSON endpoint.
-                app.UseSwagger();
-                // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
-                app.UseSwaggerUI();
             }
+            // NOTE : swagger 정보 -> https://learn.microsoft.com/en-us/aspnet/core/tutorials/getting-started-with-swashbuckle?view=aspnetcore-3.1&tabs=visual-studio
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
+            app.UseSwaggerUI();
 
             app.UseHttpsRedirection();
 
