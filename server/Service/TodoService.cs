@@ -41,14 +41,6 @@ namespace TodoList.Service
             {
                 todo.Content = newTodo.Content;
                 todo.UpdatedTime = now;
-                if(newTodo.IsDone)
-                {
-                    todo.DoneTime = now;
-                }
-                else
-                {
-                    todo.DoneTime = null;
-                }
 
                 _context.SaveChanges();
             }

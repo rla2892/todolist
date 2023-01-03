@@ -10,6 +10,6 @@ namespace TodoList.Data.Model.ViewModel
     public class TodoViewModify
     {
         public string Content { get; set; }
-        public bool IsDone { get; set; }
+        //public bool IsDone { get; set; }
     }
 }
