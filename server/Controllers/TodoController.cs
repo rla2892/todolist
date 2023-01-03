@@ -45,6 +45,13 @@ namespace TodoList.Controllers
             return Ok();
         }
 
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            _service.Delete(id);
+            return Ok();
+        }
+
         [HttpGet("list")]
         public IActionResult List()
         {

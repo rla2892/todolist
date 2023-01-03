@@ -64,6 +64,16 @@ namespace TodoList.Service
                 _context.SaveChanges();
             }
         }
+        public void Delete(Guid id)
+        {
+            var todo = getTodo(id);
+            if(todo != null)
+            {
+                _context.Todo.Remove(todo);
+                _context.SaveChanges();
+            }
+
+        }
 
         public List<Todo> ListTodo() => _context.Todo.ToList();
         public Todo GetTodo(Guid id) => getTodo(id);
