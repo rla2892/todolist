@@ -1,5 +1,8 @@
-# todolist
-Todo List Application
+# Todo List Application
+- Built with .NET Core 3.1
+- Author : Sangjin Kim
+
+# Back-end
 
 ## Swagger 확인
 - ~/swagger
