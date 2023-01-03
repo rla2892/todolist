@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.WebSockets;
 using TodoList.Data.Context;
 using TodoList.Data.Model;
@@ -27,6 +29,13 @@ namespace TodoList.Service
             };
             _context.Todo.Add(newTodo);
             _context.SaveChanges(); // TODO: async 동작 확인
+        }
+
+        public List<Todo> ListTodo()
+        {
+            var list = _context.Todo.ToList();
+
+            return list;
         }
     }
 }

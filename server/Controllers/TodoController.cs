@@ -15,11 +15,19 @@ namespace TodoList.Controllers
             _service = service;
         }
 
-        [HttpPost("add")]
+        [HttpPost]
         public IActionResult AddTodo([FromBody] TodoViewAdd todo)
         {
             _service.AddTodo(todo);
             return Ok();
+        }
+
+        [HttpGet("list")]
+        public IActionResult List()
+        {
+            var list = _service.ListTodo();
+
+            return Ok(list);
         }
     }
 }
