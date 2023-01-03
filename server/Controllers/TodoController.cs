@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using TodoList.Data.Model.ViewModel;
 using TodoList.Service;
 
@@ -28,6 +29,14 @@ namespace TodoList.Controllers
             var list = _service.ListTodo();
 
             return Ok(list);
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult Get(Guid id)
+        {
+            var todo = _service.GetTodo(id);
+
+            return Ok(todo);
         }
     }
 }

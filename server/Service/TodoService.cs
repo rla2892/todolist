@@ -31,11 +31,7 @@ namespace TodoList.Service
             _context.SaveChanges(); // TODO: async 동작 확인
         }
 
-        public List<Todo> ListTodo()
-        {
-            var list = _context.Todo.ToList();
-
-            return list;
-        }
+        public List<Todo> ListTodo() => _context.Todo.ToList();
+        public Todo GetTodo(Guid id) => _context.Todo.FirstOrDefault(o => o.Id == id);
     }
 }
