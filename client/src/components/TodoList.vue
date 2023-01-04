@@ -6,6 +6,7 @@
   </div>
   <ul>
     <li v-for="todoItem of list" v-bind:key="todoItem" >
+      <button @click="onSetDone(todoItem.id, !todoItem.isDone)" class="doneBtn">{{ todoItem.isDone ? 'V' : '&nbsp;' }}</button>
       <span>{{ todoItem }}</span>
       <button @click="onDel(todoItem.id)" >Delete</button>
     </li>
@@ -50,6 +51,12 @@ export default {
         })
       })
     },
+    async SetDone (id, done) {
+      const url = `${API_URL}/api/todo/${done ? 'done' : 'undo'}/${id}`
+      await fetch(url, {
+        method: 'PUT'
+      })
+    },
     async DeleteTodo (id) {
       const url = `${API_URL}/api/todo/${id}`
       await fetch(url, {
@@ -63,6 +70,10 @@ export default {
     },
     async onDel (id) {
       await this.DeleteTodo(id)
+      this.fetchData()
+    },
+    async onSetDone (id, done) {
+      await this.SetDone(id, done)
       this.fetchData()
     }
   }
@@ -79,5 +90,12 @@ li {
   border-style: solid;
   margin-bottom: 1rem;
   list-style: none;
+}
+.doneBtn {
+  background-color: rgba(0,0,0,0);
+  cursor: pointer;
+}
+.doneBtn:hover {
+  background-color: rgba(0,0,0,0.1);
 }
 </style>
