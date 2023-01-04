@@ -30,11 +30,9 @@ export default {
     async fetchData () {
       const url = `${API_URL}/api/todo/list`
       const res = await fetch(url, {
-        // mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json'
-        },
-        redirect: 'follow'
+        }
       })
       const json = await res.json()
       this.list = json
@@ -45,7 +43,6 @@ export default {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
-          // 'Content-Type': 'application/x-www-form-urlencoded',
         },
         body: JSON.stringify({
           content: content
