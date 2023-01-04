@@ -7,7 +7,7 @@ using TodoList.Service;
 
 namespace TodoList.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/todo")] // NOTE : api url path 에 소문자 이용하기 위해 [controller] 사용 안함
     [ApiController]
     public class TodoController : ControllerBase
     {
