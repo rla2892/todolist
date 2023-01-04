@@ -56,6 +56,7 @@ export default {
     },
     onAdd (e) {
       this.AddTodo(this.addInputText)
+      this.addInputText = '' // add 함수 call 이후, input 비우기
     }
   }
 }
