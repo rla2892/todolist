@@ -1,5 +1,9 @@
 <template>
   <h1>Todo List App - Sangjin</h1>
+  <div>
+    <input id="addInput" v-model="addInputText" type="text" placeholder="Write here!!!">
+    <button @click="onAdd" >Add</button>
+  </div>
   <ul>
     <li v-for="todoItem of list" v-bind:key="todoItem" >
       <span>{{ todoItem }}</span>
@@ -14,7 +18,8 @@ const API_URL = `http://localhost:53015`
 export default {
   data () {
     return {
-      list: [11, 22, 33]
+      list: null,
+      addInputText: ''
     }
   },
   created () {
@@ -33,6 +38,24 @@ export default {
       })
       const json = await res.json()
       this.list = json
+    },
+    async AddTodo (content) {
+      const url = `${API_URL}/api/todo`
+      await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+          // 'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: JSON.stringify({
+          content: content
+        })
+      })
+
+      this.fetchData()
+    },
+    onAdd (e) {
+      this.AddTodo(this.addInputText)
     }
   }
 }
