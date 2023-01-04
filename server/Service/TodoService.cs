@@ -75,7 +75,7 @@ namespace TodoList.Service
 
         }
 
-        public List<Todo> ListTodo() => _context.Todo.ToList();
+        public IEnumerable<Todo> ListTodo() => _context.Todo.ToList().OrderByDescending(o => o.CreatedTime);
         public Todo GetTodo(Guid id) => getTodo(id);
     }
 }
