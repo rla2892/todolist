@@ -28,6 +28,8 @@ namespace TodoList
 
         public IConfiguration Configuration { get; }
 
+        private string _corsPolicyName = "localCorsPolicy";
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -35,6 +37,18 @@ namespace TodoList
             services.AddScoped<TodoService>(); // add singleton 되지 않음 -> appDbContext 와 scope 문제
             services.AddControllers();
             services.AddSwaggerGen();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: _corsPolicyName,
+                                  policy =>
+                                  {
+                                      policy.WithOrigins("http://localhost:8080")
+                                      .AllowAnyMethod()
+                                      .AllowAnyOrigin()
+                                      .AllowAnyHeader();
+                                  });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -51,9 +65,11 @@ namespace TodoList
             // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.)
             app.UseSwaggerUI();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection(); // NOTE : TEST 를 위해 잠시 꺼둠
 
             app.UseRouting();
+
+            app.UseCors(_corsPolicyName);
 
             app.UseAuthorization();
 
