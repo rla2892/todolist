@@ -7,6 +7,7 @@
   <ul>
     <li v-for="todoItem of list" v-bind:key="todoItem" >
       <span>{{ todoItem }}</span>
+      <button @click="onDel(todoItem.id)" >Delete</button>
     </li>
   </ul>
 </template>
@@ -48,12 +49,21 @@ export default {
           content: content
         })
       })
-
-      this.fetchData()
     },
-    onAdd (e) {
-      this.AddTodo(this.addInputText)
+    async DeleteTodo (id) {
+      const url = `${API_URL}/api/todo/${id}`
+      await fetch(url, {
+        method: 'DELETE'
+      })
+    },
+    async onAdd (e) {
+      await this.AddTodo(this.addInputText)
       this.addInputText = '' // add 함수 call 이후, input 비우기
+      this.fetchData() // TODO : Add 이후 전체 fetch 가 아닌 add 된 것만 get 해서 this.list 에 추가해주기
+    },
+    async onDel (id) {
+      await this.DeleteTodo(id)
+      this.fetchData()
     }
   }
 }
