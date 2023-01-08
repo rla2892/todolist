@@ -42,7 +42,7 @@ export default {
       const json = await res.json()
       this.list = json
     },
-    async AddTodo (content) {
+    async addTodo (content) {
       const url = `${API_URL}/api/todo`
       await fetch(url, {
         method: 'POST',
@@ -54,7 +54,7 @@ export default {
         })
       })
     },
-    async ModifyTodo (id, content) {
+    async modifyTodo (id, content) {
       const url = `${API_URL}/api/todo/${id}`
       await fetch(url, {
         method: 'PUT',
@@ -66,20 +66,20 @@ export default {
         })
       })
     },
-    async SetDone (id, done) {
+    async setDone (id, done) {
       const url = `${API_URL}/api/todo/${done ? 'done' : 'undo'}/${id}`
       await fetch(url, {
         method: 'PUT'
       })
     },
-    async DeleteTodo (id) {
+    async deleteTodo (id) {
       const url = `${API_URL}/api/todo/${id}`
       await fetch(url, {
         method: 'DELETE'
       })
     },
     async onAdd (e) {
-      await this.AddTodo(this.addInputText)
+      await this.addTodo(this.addInputText)
       this.addInputText = '' // add 함수 call 이후, input 비우기
       this.fetchData() // TODO : Add 이후 전체 fetch 가 아닌 add 된 것만 get 해서 this.list 에 추가해주기
     },
@@ -87,16 +87,17 @@ export default {
       clearTimeout(modifyTimeout)
       modifyTimeout = setTimeout(async () => {
         const content = e.target.value
-        await this.ModifyTodo(todoItem.id, content)
-        this.fetchData()
+        await this.modifyTodo(todoItem.id, content)
+        // NOTE : 수정 후 refresh 필요 없음
+        // this.fetchData()
       }, 1000)
     },
     async onDel (id) {
-      await this.DeleteTodo(id)
+      await this.deleteTodo(id)
       this.fetchData()
     },
     async onSetDone (id, done) {
-      await this.SetDone(id, done)
+      await this.setDone(id, done)
       this.fetchData()
     }
   }
