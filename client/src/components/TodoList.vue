@@ -6,7 +6,7 @@
   </div>
   <ul>
     <li v-for="todoItem of list" v-bind:key="todoItem" >
-      <button @click="onSetDone(todoItem.id, !todoItem.isDone)" class="doneBtn">{{ todoItem.isDone ? 'V' : '&nbsp;' }}</button>
+      <button @click="onSetDone(todoItem)" class="doneBtn">{{ todoItem.isDone ? 'V' : '&nbsp;' }}</button>
       <input type="text" v-model="todoItem.content" @keyup="onKeyupModify($event, todoItem)" />
       <span>{{ todoItem }}</span>
       <button @click="onDel(todoItem.id)" >Delete</button>
@@ -96,9 +96,12 @@ export default {
       await this.deleteTodo(id)
       this.fetchData()
     },
-    async onSetDone (id, done) {
-      await this.setDone(id, done)
-      this.fetchData()
+    async onSetDone (item) {
+      const newDone = !item.isDone
+      item.isDone = newDone
+      await this.setDone(item.id, newDone)
+      // NOTE : 수정 후 refresh 필요 없음
+      // this.fetchData()
     }
   }
 }
