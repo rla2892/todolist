@@ -37,7 +37,13 @@
       "parser": "@babel/eslint-parser"
     },
     "rules": {
-      "quotes": ["error", "single", { "allowTemplateLiterals" : true}]
+      "quotes": [
+        "error",
+        "single",
+        {
+          "allowTemplateLiterals": true
+        }
+      ]
     }
   },
   "browserslist": [
