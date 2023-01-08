@@ -7,6 +7,7 @@
   <ul>
     <li v-for="todoItem of list" v-bind:key="todoItem" >
       <button @click="onSetDone(todoItem.id, !todoItem.isDone)" class="doneBtn">{{ todoItem.isDone ? 'V' : '&nbsp;' }}</button>
+      <input type="text" v-model="todoItem.content" @keyup="onKeyupModify($event, todoItem)" />
       <span>{{ todoItem }}</span>
       <button @click="onDel(todoItem.id)" >Delete</button>
     </li>
@@ -14,8 +15,10 @@
 </template>
 
 <script>
-const API_URL = `http://localhost:53015`
-// const API_URL = `https://localhost:44397`
+// const API_URL = `http://localhost:53015`
+const API_URL = `https://localhost:44397`
+
+let modifyTimeout
 
 export default {
   data () {
@@ -51,6 +54,18 @@ export default {
         })
       })
     },
+    async ModifyTodo (id, content) {
+      const url = `${API_URL}/api/todo/${id}`
+      await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          content: content
+        })
+      })
+    },
     async SetDone (id, done) {
       const url = `${API_URL}/api/todo/${done ? 'done' : 'undo'}/${id}`
       await fetch(url, {
@@ -67,6 +82,14 @@ export default {
       await this.AddTodo(this.addInputText)
       this.addInputText = '' // add 함수 call 이후, input 비우기
       this.fetchData() // TODO : Add 이후 전체 fetch 가 아닌 add 된 것만 get 해서 this.list 에 추가해주기
+    },
+    onKeyupModify (e, todoItem) {
+      clearTimeout(modifyTimeout)
+      modifyTimeout = setTimeout(async () => {
+        const content = e.target.value
+        await this.ModifyTodo(todoItem.id, content)
+        this.fetchData()
+      }, 1000)
     },
     async onDel (id) {
       await this.DeleteTodo(id)
