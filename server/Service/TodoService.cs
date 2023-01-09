@@ -16,7 +16,7 @@ namespace TodoList.Service
             _context = context;
         }
 
-        public void AddTodo(TodoViewAdd todo)
+        public Todo AddTodo(TodoViewAdd todo)
         {
             var now = DateTime.Now;
             var newTodo = new Todo()
@@ -29,6 +29,7 @@ namespace TodoList.Service
             };
             _context.Todo.Add(newTodo);
             _context.SaveChanges(); // TODO: async 동작 확인
+            return newTodo;
         }
 
         private Todo getTodo(Guid id) => _context.Todo.FirstOrDefault(o => o.Id == id);

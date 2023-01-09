@@ -45,7 +45,7 @@ export default {
     },
     async addTodo (content) {
       const url = `${API_URL}/api/todo`
-      await fetch(url, {
+      const res = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -54,6 +54,8 @@ export default {
           content: content
         })
       })
+      const json = await res.json()
+      return json
     },
     async modifyTodo (id, content) {
       const url = `${API_URL}/api/todo/${id}`
@@ -80,9 +82,9 @@ export default {
       })
     },
     async onAdd (e) {
-      await this.addTodo(this.addInputText)
+      const newTodo = await this.addTodo(this.addInputText)
+      this.list.unshift(newTodo)
       this.addInputText = '' // add 함수 call 이후, input 비우기
-      this.fetchData() // TODO : Add 이후 전체 fetch 가 아닌 add 된 것만 get 해서 this.list 에 추가해주기
     },
     onKeyupModify (e, todoItem) {
       clearTimeout(modifyTimeout)

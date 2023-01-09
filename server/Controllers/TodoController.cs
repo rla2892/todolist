@@ -20,8 +20,8 @@ namespace TodoList.Controllers
         [HttpPost]
         public IActionResult AddTodo([FromBody] TodoViewAdd todo)
         {
-            _service.AddTodo(todo);
-            return Ok();
+            var newTodo = _service.AddTodo(todo);
+            return Ok(newTodo);
         }
 
         [HttpPut("{id}")]
