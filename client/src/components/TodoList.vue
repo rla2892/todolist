@@ -91,8 +91,6 @@ export default {
       modifyTimeout = setTimeout(async () => {
         const content = e.target.value
         await this.modifyTodo(todoItem.id, content)
-        // NOTE : 수정 후 refresh 필요 없음
-        // this.fetchData()
       }, 1000)
     },
     async onDel (id) {
@@ -100,15 +98,11 @@ export default {
         return item.id === id
       })
       await this.deleteTodo(id)
-      // NOTE : 수정 후 refresh 필요 없음
-      // this.fetchData()
     },
     async onSetDone (item) {
       const newDone = !item.isDone
       item.isDone = newDone
       await this.setDone(item.id, newDone)
-      // NOTE : 수정 후 refresh 필요 없음
-      // this.fetchData()
     }
   }
 }
