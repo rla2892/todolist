@@ -15,6 +15,7 @@
 </template>
 
 <script>
+import _ from 'lodash'
 // const API_URL = `http://localhost:53015`
 const API_URL = `https://localhost:44397`
 
@@ -93,8 +94,12 @@ export default {
       }, 1000)
     },
     async onDel (id) {
+      _.remove(this.list, (item) => {
+        return item.id === id
+      })
       await this.deleteTodo(id)
-      this.fetchData()
+      // NOTE : 수정 후 refresh 필요 없음
+      // this.fetchData()
     },
     async onSetDone (item) {
       const newDone = !item.isDone
