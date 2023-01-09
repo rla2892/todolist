@@ -8,7 +8,7 @@
     <li v-for="todoItem of list" v-bind:key="todoItem" >
       <button @click="onSetDone(todoItem)" class="doneBtn">{{ todoItem.isDone ? 'V' : '&nbsp;' }}</button>
       <input type="text" v-model="todoItem.content" @keyup="onKeyupModify($event, todoItem)" />
-      <span>{{ todoItem }}</span>
+      <!-- <span>{{ todoItem }}</span> -->
       <button @click="onDel(todoItem.id)" >Delete</button>
     </li>
   </ul>
