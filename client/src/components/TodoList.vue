@@ -1,15 +1,18 @@
 <template>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
   <h1>Todo List App - Sangjin</h1>
   <div>
-    <input id="addInput" v-model="addInputText" type="text" placeholder="Write here!!!">
-    <button @click="onAdd" >Add</button>
+    <input id="addInput" v-model="addInputText" type="text" placeholder="Write here!!!" class="write">
+    <button @click="onAdd" class="my-btn" >Add</button>
   </div>
   <ul>
     <li v-for="todoItem of list" v-bind:key="todoItem" >
-      <button @click="onSetDone(todoItem)" class="doneBtn">{{ todoItem.isDone ? 'V' : '&nbsp;' }}</button>
-      <input type="text" v-model="todoItem.content" @keyup="onKeyupModify($event, todoItem)" />
+      <span class="material-symbols-outlined done-btn" @click="onSetDone(todoItem)">
+        {{ todoItem.isDone ? 'task_alt' : 'circle' }}
+      </span>
+      <input type="text" v-model="todoItem.content" @keyup="onKeyupModify($event, todoItem)" class="read"/>
       <!-- <span>{{ todoItem }}</span> -->
-      <button @click="onDel(todoItem.id)" >Delete</button>
+      <button @click="onDel(todoItem.id)" class="my-btn" >Delete</button>
     </li>
   </ul>
 </template>
@@ -119,11 +122,25 @@ li {
   margin-bottom: 1rem;
   list-style: none;
 }
-.doneBtn {
+.done-btn {
   background-color: rgba(0,0,0,0);
   cursor: pointer;
 }
-.doneBtn:hover {
+.done-btn:hover {
   background-color: rgba(0,0,0,0.1);
+}
+.write{
+  margin-right: 1rem;
+}
+.read{
+  margin-right: 1rem;
+}
+.my-btn {
+  background-color: rgb(140, 255, 160); /* lime green=(50,205,70) */
+  color: rgb(80,80,80);
+  font-weight: 700;
+  cursor: pointer;
+  border-width: 0;
+  border-radius: 1rem;
 }
 </style>
