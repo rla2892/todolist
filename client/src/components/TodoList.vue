@@ -10,7 +10,7 @@
       <span class="material-symbols-outlined done-btn" @click="onSetDone(todoItem)">
         {{ todoItem.isDone ? 'task_alt' : 'circle' }}
       </span>
-      <input type="text" v-model="todoItem.content" @keyup="onKeyupModify($event, todoItem)" class="read"/>
+      <input type="text" v-model="todoItem.content" @keyup="onKeyupModify($event, todoItem)" :class="'read '+(todoItem.isDone ? 'done' : '')"/>
       <!-- <span>{{ todoItem }}</span> -->
       <button @click="onDel(todoItem.id)" class="my-btn" >Delete</button>
     </li>
@@ -116,15 +116,17 @@ ul {
   padding-inline-start: 0;
 }
 li {
-  border-color: limegreen;
+  /* border-color: limegreen;
   border-width: 2px;
-  border-style: solid;
+  border-style: solid; */
   margin-bottom: 1rem;
   list-style: none;
 }
 .done-btn {
   background-color: rgba(0,0,0,0);
   cursor: pointer;
+  vertical-align: bottom;
+  border-radius: 50%;
 }
 .done-btn:hover {
   background-color: rgba(0,0,0,0.1);
@@ -134,6 +136,14 @@ li {
 }
 .read{
   margin-right: 1rem;
+  margin-left: 0.5rem;
+  border-width: 0;
+  height: 1.5rem;
+  font-weight: 600;
+}
+.read.done{
+  text-decoration: line-through;
+  color: rgb(50, 50, 50, 0.5);
 }
 .my-btn {
   background-color: rgb(140, 255, 160); /* lime green=(50,205,70) */
@@ -142,5 +152,6 @@ li {
   cursor: pointer;
   border-width: 0;
   border-radius: 1rem;
+  height: 1.5rem;
 }
 </style>
